@@ -22,7 +22,6 @@ function Header() {
         }
     }, [dispatch, isLogIn]);
 
-    const sign = isLogIn ? "Log Out" : "Log In";
 
     return (
         <header className="bg-gray-800 p-4">
@@ -41,28 +40,43 @@ function Header() {
 
                 {/* Right: User Info and Navigation */}
                 <div className="flex items-center space-x-4">
-                    <Link to="/profile" className="text-white text-sm">
-                        {userName}
-                    </Link>
-                    <Link to="/profile">
-                        <img
-                            src={image}
-                            alt="User"
-                            style={{ width: '24px', height: '24px', borderRadius: '50%' }}
-                        />
-                    </Link>
-                    <button
-                        onClick={async () => {
-                            if (sign === "Log In") {
-                                navigate('/login');
-                            } else {
-                                await logout(navigate);
-                            }
-                        }}
-                        className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl text-sm"
-                    >
-                        {sign}
-                    </button>
+                    {isLogIn ? (
+                        <>
+                            <Link to="/profile" className="text-white text-sm">
+                                {userName}
+                            </Link>
+                            <Link to="/profile">
+                                <img
+                                    src={image}
+                                    alt="User"
+                                    style={{ width: '24px', height: '24px', borderRadius: '50%' }}
+                                />
+                            </Link>
+                            <button
+                                onClick={async () => {
+                                    await logout(navigate);
+                                }}
+                                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl text-sm"
+                            >
+                                Log Out
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button
+                                onClick={() => navigate('/login')}
+                                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl text-sm"
+                            >
+                                Log In
+                            </button>
+                            <button
+                                onClick={() => navigate('/register')}
+                                className="bg-gradient-to-r from-green-500 to-teal-500 text-white px-4 py-1 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl text-sm"
+                            >
+                                Register
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
         </header>
