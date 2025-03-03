@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+.special-font {
+    font-family: 'Alfa Slab One', cursive;
+}
+.text-10xl {
+  font-size: 6rem; 
+}

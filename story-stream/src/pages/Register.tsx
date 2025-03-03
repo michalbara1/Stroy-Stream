@@ -7,7 +7,6 @@ import { AppDispatch } from '../store/store';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
-import Header from '../components/Header';
 
 const Register: React.FC = () => {
     const [userName, setUserName] = useState('');
@@ -58,7 +57,6 @@ const Register: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
-            <Header />
             <main className="flex-grow p-4 flex justify-center items-center pb-20">
                 <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
                     <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>

@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from '../store/store';
 import { getUserInfo, logoutUser } from '../store/reducer/userSlice';
 import { baseURL } from '../api/api';
 import { useNavigate, Link } from 'react-router-dom';
+import '../App.css';
 
 function Header() {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ function Header() {
         }
     }, [dispatch, isLogIn]);
 
+    const sign = isLogIn ? "Log Out" : "Log In";
 
     return (
         <header className="bg-gray-800 p-4">
@@ -32,9 +34,9 @@ function Header() {
                         <img
                             src={`${baseURL}/public/logo.png`}
                             alt="Logo"
-                            style={{ width: '24px', height: '24px', marginRight: '8px' }}
+                            style={{ width: '70px', height: '70px', marginRight: '8px' }}
                         />
-                        <span className="text-white text-lg">Story Stream</span>
+                        <span className="text-white text-10xl special-font">Story Stream</span>
                     </Link>
                 </div>
 
@@ -58,11 +60,17 @@ function Header() {
                                 }}
                                 className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl text-sm"
                             >
-                                Log Out
+                                {sign}
                             </button>
                         </>
                     ) : (
                         <>
+                            <span className="text-white text-sm">Guest</span>
+                            <img
+                                src={`${baseURL}/public/user.png`}
+                                alt="User"
+                                style={{ width: '24px', height: '24px', borderRadius: '50%' }}
+                            />
                             <button
                                 onClick={() => navigate('/login')}
                                 className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl text-sm"
