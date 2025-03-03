@@ -27,10 +27,10 @@ function Header() {
 
     return (
         <header className="bg-gray-800 p-4">
-            <div className="container mx-auto flex items-center justify-between">
+            <div className="container mx-auto" style={{ position: 'relative' }}>
                 {/* Left: Logo and Title */}
-                <div className="flex items-center">
-                    <Link to="/" className="flex items-center">
+                <div style={{ display: 'inline-block', marginLeft: '10px' }}>
+                    <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
                         <img
                             src={`${baseURL}/public/logo.png`}
                             alt="Logo"
@@ -41,13 +41,13 @@ function Header() {
                 </div>
 
                 {/* Right: User Info and Navigation */}
-                <div className="flex items-center space-x-4">
+                <div style={{ display: 'inline-block', position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}>
                     {isLogIn ? (
                         <>
-                            <Link to="/profile" className="text-white text-sm">
+                            <Link to="/profile" className="text-white text-sm" style={{ marginRight: '10px' }}>
                                 {userName}
                             </Link>
-                            <Link to="/profile">
+                            <Link to="/profile" style={{ marginRight: '10px', display: 'inline-block', verticalAlign: 'middle' }}>
                                 <img
                                     src={image}
                                     alt="User"
@@ -59,14 +59,15 @@ function Header() {
                                     await logout(navigate);
                                 }}
                                 className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl text-sm"
+                                style={{ verticalAlign: 'middle' }}
                             >
                                 {sign}
                             </button>
                         </>
                     ) : (
                         <>
-                            <span className="text-white text-sm">Guest</span>
-                            <Link to="/profile">
+                            <span className="text-white text-sm" style={{ marginRight: '10px', verticalAlign: 'middle' }}>Guest</span>
+                            <Link to="/profile" style={{ marginRight: '10px', display: 'inline-block', verticalAlign: 'middle' }}>
                                 <img
                                     src={`${baseURL}/public/user.png`}
                                     alt="User"
@@ -76,12 +77,14 @@ function Header() {
                             <button
                                 onClick={() => navigate('/login')}
                                 className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl text-sm"
+                                style={{ marginRight: '10px', verticalAlign: 'middle' }}
                             >
                                 Log In
                             </button>
                             <button
                                 onClick={() => navigate('/register')}
                                 className="bg-gradient-to-r from-green-500 to-teal-500 text-white px-4 py-1 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl text-sm"
+                                style={{ verticalAlign: 'middle' }}
                             >
                                 Register
                             </button>
@@ -92,5 +95,4 @@ function Header() {
         </header>
     );
 }
-
 export default Header;
