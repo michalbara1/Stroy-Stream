@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 import Post from '../components/Post';
 import { toast } from 'react-toastify';
 import { messageClear } from '../store/reducer/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store/store';
-import { logoutUser } from '../store/reducer/userSlice';
 
 
 const Home: React.FC = () => {
@@ -13,14 +13,9 @@ const Home: React.FC = () => {
     const handleCreatePost = () => {
         navigate('/create-post');
     };
-    const handleLogout = () => {
-        dispatch(logoutUser());
-        navigate('/'); // Or navigate('/login');
-    };
 
     const dispatch = useDispatch<AppDispatch>();
     const { successMessage,errorMessage } = useSelector((state: RootState) => state.posts);
-    const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn); // Get isLoggedIn from Redux
     useEffect(() => {
         if (successMessage) {
             toast.success(successMessage)
@@ -36,30 +31,8 @@ const Home: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
+            <Header />
             <main className="flex-grow p-4 flex flex-col items-center">
-            {isLoggedIn ? (
-                        <button
-                            onClick={handleLogout}
-                            className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl mr-2"
-                        >
-                            Logout
-                        </button>
-                    ) : (
-                        <>
-                            <button
-                                onClick={() => navigate('/login')}
-                                className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl mr-2"
-                            >
-                                Login
-                            </button>
-                            <button
-                                onClick={() => navigate('/register')}
-                                className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl"
-                            >
-                                Register
-                            </button>
-                        </>
-                    )}
                 <button
                     onClick={handleCreatePost}
                     className="mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl"

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store/store';
 import { googleLogin, login } from '../store/reducer/userSlice';
 import { GoogleLogin } from '@react-oauth/google';
+import Header from '../components/Header';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -50,6 +51,7 @@ const Login: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
+            <Header />
             <main className="flex-grow p-4 flex justify-center items-center pb-20">
                 <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
                     <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>

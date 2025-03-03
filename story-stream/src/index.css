@@ -3,23 +3,11 @@
   line-height: 1.5;
   font-weight: 400;
 
+  /* Remove global color to avoid interference */
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  /* Optional: Background color, feel free to change */
+  background-color: #f9f9f9; 
 }
 
 body {
@@ -28,13 +16,29 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  /* Remove global text color */
+  color: inherit;
+  background-color: inherit;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Links - Keep these if you want default link styling */
+a {
+  font-weight: 500;
+  color: #007bff;
+  text-decoration: none;
+}
+a:hover {
+  color: #0056b3;
 }
 
+/* Headings - No forced global styling */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Optional - Button defaults (you can remove this if using only Tailwind) */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -42,27 +46,23 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  background-color: #f0f0f0;
+  color: #333;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #007bff;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Optional - Light mode support */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+      background-color: #ffffff;
+      color: #212529; /* Default text color in light mode */
   }
 }

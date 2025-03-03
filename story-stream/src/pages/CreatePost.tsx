@@ -8,6 +8,7 @@ import api, { baseURL } from '../api/api';
 import { getAccessToken } from '../utils/authUtils';
 import { useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import Header from '../components/Header';
 
 const CreatePost: React.FC = () => {
     const [title, setTitle] = useState('');
@@ -119,6 +120,7 @@ const CreatePost: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
+            <Header />
             <main className="flex-grow p-4 flex justify-center items-center">
                 <div className="w-full max-w-2xl bg-white shadow-md rounded-lg p-6">
                     <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Create a New Post</h2>

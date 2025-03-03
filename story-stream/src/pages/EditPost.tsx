@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { update_post } from '../store/reducer/postSlice';
 import { baseURL } from '../api/api';
+import Header from '../components/Header';
 
 const EditPost: React.FC = () => {
     const { postId } = useParams<{ postId: string }>();
@@ -103,6 +104,7 @@ const EditPost: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
+            <Header />
             <main className="flex-grow p-4 flex justify-center items-center relative">
                 <div className="w-full max-w-2xl bg-white shadow-md rounded-lg p-6 relative">
                     <div className="flex justify-between items-center mb-6">

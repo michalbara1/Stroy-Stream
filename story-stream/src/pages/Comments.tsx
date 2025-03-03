@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from '../store/store';
 import { toast } from 'react-toastify';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { baseURL } from '../api/api';
+import Header from '../components/Header';
 
 
 const Comments: React.FC = () => {
@@ -74,6 +75,7 @@ const Comments: React.FC = () => {
     },[successMessage,dispatch,errorMessage])
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
+            <Header />
             <main className="flex-grow p-4">
                 {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
                 <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg overflow-hidden relative">
