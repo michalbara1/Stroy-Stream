@@ -95,6 +95,26 @@ const Post: React.FC = () => {
                     </div>
                     )}
 
+                    {/* Post Content */}
+                    <div className="p-4">
+                    {/* Styled Title */}
+                    <p className="ml-4 text-2xl font-bold text-purple-300">
+                    {post.title}
+                    </p>
+                    <div className="mt-4 text-gray-700">{parse(post.content)}</div>
+                    </div>
+
+                    {/* User Info */}
+                    <div className="flex items-center p-4">
+                    <img
+                        src={`${baseURL}${post.userImg}`}  
+                        alt={post.userName}
+                        className="mt-4 text-gray-700"
+                    />
+                    <h2 className="mt-4 text-gray-700">{post.userName}</h2>
+                    </div>
+
+
                     {/* Post Image */}
                     {post.postImg && (
                                 <Link to={`/comments/${post._id}`} className="block w-full h-48 bg-gray-200">
@@ -105,25 +125,6 @@ const Post: React.FC = () => {
                                     />
                                 </Link>
                      )}
-
-                    {/* User Info */}
-                    <div className="flex items-center p-4">
-                    <img
-                        src={`{post.userImg}`} // Replace this with `post.userImage` if you have a user-specific image field
-                        alt={post.userName}
-                        className="w-10 h-10 rounded-full bg-gray-300 flex-shrink-0"
-                    />
-                    <h2 className="ml-4 text-xl font-bold">{post.userName}</h2>
-                    </div>
-
-                    {/* Post Content */}
-                    <div className="p-4">
-                    {/* Styled Title */}
-                    <p className="mt-2 text-gray-800 font-serif text-2xl font-bold tracking-wide leading-tight">
-                        {post.title}
-                    </p>
-                    <div className="mt-4 text-gray-700">{parse(post.content)}</div>
-                    </div>
 
                     {/* Post Footer */}
                     <div className="p-4 flex justify-between items-center border-t">

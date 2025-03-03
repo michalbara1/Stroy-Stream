@@ -81,7 +81,7 @@ const CreatePost: React.FC = () => {
             const formData = new FormData();
             formData.append('photo', photo);
             const token = await getAccessToken();
-            const photoResponse = await api.post('/posts/upload', formData, {
+            const photoResponse = await api.post('/posts/storage', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${token}`,

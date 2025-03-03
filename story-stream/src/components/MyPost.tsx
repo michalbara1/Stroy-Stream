@@ -80,7 +80,7 @@ const MyPost: React.FC = () => {
                     {/* User Info */}
                     <div className="flex items-center p-4">
                         <img
-                            src={`${baseURL}${post.userImg}`} // Replace this with `post.userImage` if you have a user-specific image field
+                            src={`${baseURL}${post.userImg}`}
                             alt={post.userName}
                             className="w-10 h-10 rounded-full bg-gray-300 flex-shrink-0"
                         />

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import {register } from '../store/reducer/userSlice';
+import { googleLogin, register } from '../store/reducer/userSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store/store';
 import { useNavigate } from 'react-router-dom';
-
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
 
 const Register: React.FC = () => {
     const [userName, setUserName] = useState('');
@@ -14,6 +15,25 @@ const Register: React.FC = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
+    const responseGoogle = async (response: any) => {
+        const decodedEmail: { email: string , name : string} = jwtDecode(response?.credential);
+        if(!decodedEmail){
+            toast.error('Register failed');
+            return;
+        } else {
+            try {
+                await dispatch(googleLogin( decodedEmail));
+                toast.success('Register successful');
+                navigate('/');
+            } catch (err : any) {
+                toast.error(err);
+            }
+        }
+    };
+    const errorGoogle = () => {
+        toast.error('Register failed');
+        return;
+    };
     const handleRegister = async () => {
 
         if (!email || !password || !userName) {
@@ -41,14 +61,15 @@ const Register: React.FC = () => {
                 <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
                     <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
                     <div className="flex justify-center mb-4">
-                        {/* <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mr-2">
-                            <FaFacebook className="mr-2" />
-                            Login with Facebook
-                        </button> */}
                         {/* <button className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center">
                             <FaGoogle className="mr-2" />
                             Login with Google
                         </button> */}
+                        <GoogleLogin 
+                            containerProps={{ className: "bg-red-600 text-white px-4 py-2 rounded-lg flex items-center" }} 
+                            onSuccess={responseGoogle} 
+                            onError={errorGoogle} 
+                        />
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
