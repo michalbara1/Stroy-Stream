@@ -66,11 +66,13 @@ function Header() {
                     ) : (
                         <>
                             <span className="text-white text-sm">Guest</span>
-                            <img
-                                src={`${baseURL}/public/user.png`}
-                                alt="User"
-                                style={{ width: '24px', height: '24px', borderRadius: '50%' }}
-                            />
+                            <Link to="/profile">
+                                <img
+                                    src={`${baseURL}/public/user.png`}
+                                    alt="User"
+                                    style={{ width: '24px', height: '24px', borderRadius: '50%' }}
+                                />
+                            </Link>
                             <button
                                 onClick={() => navigate('/login')}
                                 className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-1 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-xl text-sm"
