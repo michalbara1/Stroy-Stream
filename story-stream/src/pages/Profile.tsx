@@ -9,6 +9,7 @@ import { getAccessToken } from '../utils/authUtils';
 import { update_profile } from '../store/reducer/userSlice';
 import {useNavigate } from 'react-router-dom';
 import { update_comment } from '../store/reducer/commentSlice';
+import { baseURL } from '../api/api';
 
 const Profile: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -158,7 +159,7 @@ const Profile: React.FC = () => {
                         <div className="flex flex-col items-center">
                             <div className="relative">
                                 <img
-                                    src={previewImage}
+                                    src={`${baseURL}${previewImage}`}
                                     alt="User"
                                   className="w-[200px] h-[200px] rounded-full object-cover border-[10px] bg-gradient-to-r from-blue-500 to-purple-500 p-1 shadow-lg ring-4 ring-offset-4 ring-offset-gray-100 ring-blue-300 "
                                 />
