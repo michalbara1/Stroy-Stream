@@ -9,7 +9,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { update_post } from '../store/reducer/postSlice';
 import { baseURL } from '../api/api';
-import Header from '../components/Header';
 
 const EditPost: React.FC = () => {
     const { postId } = useParams<{ postId: string }>();

@@ -2,22 +2,17 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  /* Remove global color to avoid interference */
   color-scheme: light dark;
-
-  /* Optional: Background color, feel free to change */
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  /* Remove the problematic flex layout */
+  /* display: flex; */
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
-
-  /* Remove global text color */
   color: inherit;
   background-color: inherit;
 }
@@ -54,15 +49,14 @@ button {
 button:hover {
   border-color: #007bff;
 }
-button:focus,
-button:focus-visible {
+button:focus, button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
 /* Optional - Light mode support */
 @media (prefers-color-scheme: light) {
   :root {
-      background-color: #ffffff;
-      color: #212529; /* Default text color in light mode */
+    background-color: #ffffff;
+    color: #212529; /* Default text color in light mode */
   }
 }
