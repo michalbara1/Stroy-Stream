@@ -73,7 +73,7 @@ const Register: React.FC = () => {
                 imageUrl = response.data.url;
             }
 
-            await dispatch(register({ email, password, userName, imageUrl: imageUrl })).unwrap();
+            await dispatch(register({ email, password, userName, image: imageUrl })).unwrap();
 
             toast.success('Registration successful');
             navigate('/login');

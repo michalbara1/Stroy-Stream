@@ -29,7 +29,12 @@ export const register = createAsyncThunk(
             console.log("API base URL:", api.defaults.baseURL);
             
             const { data } = await api.post('/auth/register', userData);
-            console.log("Registration successful:", data);
+            
+            // Enhanced logging to see full response structure
+            console.log("Registration successful - Full response:", JSON.stringify(data, null, 2));
+            console.log("User object in response:", data.user ? JSON.stringify(data.user, null, 2) : "No user object");
+            console.log("Image in response:", data.user?.image || "No image found in response");
+            
             return fulfillWithValue(data);
         } catch (error : any) {
             console.error("Registration error:", error);
@@ -147,6 +152,11 @@ const userSlice = createSlice({
         builder
         .addCase(register.fulfilled, (state, { payload }) => {
             state.successMessage = payload.message; 
+            
+            // Add this line to save the image from the registration response
+            if (payload.user && payload.user.image) {
+                state.image = payload.user.image;
+            }
         })
         .addCase(register.rejected, (state, { payload }) => {
             state.errorMessage = payload as string;
