@@ -6,8 +6,8 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store/store';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
-import {jwtDecode} from 'jwt-decode';
-import api from '../api/api'; // Make sure this is your Axios instance
+import { jwtDecode } from 'jwt-decode';
+import api from '../api/api';
 
 const Register: React.FC = () => {
     const [userName, setUserName] = useState('');
@@ -83,87 +83,242 @@ const Register: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100">
-            <main className="flex-grow p-4 flex justify-center items-center pb-20">
-                <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
-                    <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
-                    <div className="flex justify-center mb-4">
+        <div style={{ 
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
+            backgroundColor: '#e6f2ff',
+            padding: '0 16px'
+        }}>
+            <div style={{
+                width: '100%',
+                maxWidth: '400px',
+                margin: '0 auto',
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+                border: '4px solid #bcdcff'
+            }}>
+                <div style={{
+                    backgroundColor: '#d9edff',
+                    padding: '16px 24px',
+                    borderBottom: '2px solid #bcdcff'
+                }}>
+                    <h2 style={{
+                        fontSize: '24px',
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        color: '#2c5282',
+                        margin: 0
+                    }}>Register</h2>
+                </div>
+                
+                <div style={{ padding: '20px' }}>
+                    <div style={{ 
+                        marginBottom: '20px',
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}>
                         <GoogleLogin
                             onSuccess={responseGoogle}
                             onError={errorGoogle}
                         />
                     </div>
-                    {/* Image Upload Section */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Profile Picture</label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageChange}
-                            className="w-full"
-                        />
-                        {previewImage && (
-                            <img
-                                src={previewImage}
-                                alt="Preview"
-                                className="mt-2 w-24 h-24 object-cover rounded-full"
+                    
+                    {/* Profile Picture - Compact */}
+                    <div style={{ marginBottom: '14px' }}>
+                        <label style={{
+                            display: 'block',
+                            fontSize: '14px',
+                            fontWeight: 'bold',
+                            marginBottom: '6px',
+                            color: '#4a5568'
+                        }}>
+                            Profile Picture
+                        </label>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            backgroundColor: '#ebf5ff',
+                            border: '2px solid #90cdf4',
+                            borderRadius: '8px',
+                            padding: '6px',
+                            width: '98%'
+                        }}>
+                            {previewImage && (
+                                <img
+                                    src={previewImage}
+                                    alt="Preview"
+                                    style={{
+                                        width: '30px',
+                                        height: '30px',
+                                        objectFit: 'cover',
+                                        borderRadius: '50%',
+                                        marginRight: '10px'
+                                    }}
+                                />
+                            )}
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                style={{
+                                    width: previewImage ? 'calc(100% - 40px)' : '100%',
+                                    fontSize: '14px',
+                                    fontWeight: 'bold'
+                                }}
                             />
-                        )}
+                        </div>
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                    
+                    <div style={{ marginBottom: '14px' }}>
+                        <label style={{
+                            display: 'block',
+                            fontSize: '14px',
+                            fontWeight: 'bold',
+                            marginBottom: '6px',
+                            color: '#4a5568'
+                        }}>
+                            Username
+                        </label>
                         <input
                             type="text"
                             value={userName}
                             onChange={(e) => setUserName(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            style={{
+                                width: '94%',
+                                padding: '10px',
+                                backgroundColor: '#ebf5ff',
+                                border: '2px solid #90cdf4',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: 'bold',
+                                outline: 'none'
+                            }}
                             placeholder="Enter your username"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    
+                    <div style={{ marginBottom: '14px' }}>
+                        <label style={{
+                            display: 'block',
+                            fontSize: '14px',
+                            fontWeight: 'bold',
+                            marginBottom: '6px',
+                            color: '#4a5568'
+                        }}>
+                            Email
+                        </label>
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            style={{
+                                width: '94%',
+                                padding: '10px',
+                                backgroundColor: '#ebf5ff',
+                                border: '2px solid #90cdf4',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: 'bold',
+                                outline: 'none'
+                            }}
                             placeholder="Enter your email"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    
+                    <div style={{ marginBottom: '14px' }}>
+                        <label style={{
+                            display: 'block',
+                            fontSize: '14px',
+                            fontWeight: 'bold',
+                            marginBottom: '6px',
+                            color: '#4a5568'
+                        }}>
+                            Password
+                        </label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            style={{
+                                width: '94%',
+                                padding: '10px',
+                                backgroundColor: '#ebf5ff',
+                                border: '2px solid #90cdf4',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: 'bold',
+                                outline: 'none'
+                            }}
                             placeholder="Enter your password"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
+                    
+                    <div style={{ marginBottom: '20px' }}>
+                        <label style={{
+                            display: 'block',
+                            fontSize: '14px',
+                            fontWeight: 'bold',
+                            marginBottom: '6px',
+                            color: '#4a5568'
+                        }}>
+                            Confirm Password
+                        </label>
                         <input
                             type="password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            style={{
+                                width: '94%',
+                                padding: '10px',
+                                backgroundColor: '#ebf5ff',
+                                border: '2px solid #90cdf4',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: 'bold',
+                                outline: 'none'
+                            }}
                             placeholder="Confirm password"
                         />
                     </div>
+                    
                     <button
                         onClick={handleRegister}
-                        className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                        style={{
+                            width: '100%',
+                            backgroundColor: '#3182ce',
+                            color: 'white',
+                            padding: '10px',
+                            borderRadius: '8px',
+                            fontSize: '18px',
+                            fontWeight: 'bold',
+                            border: 'none',
+                            cursor: 'pointer'
+                        }}
                     >
                         Register
                     </button>
-                    <div className="mt-4 text-center">
-                        <p className="text-gray-700">
+                    
+                    <div style={{
+                        marginTop: '14px',
+                        textAlign: 'center'
+                    }}>
+                        <p style={{ color: '#4a5568' }}>
                             Already have an account?{' '}
-                            <Link to="/login" className="text-blue-500 hover:underline">Login</Link>
+                            <Link to="/login" style={{ 
+                                color: '#2b6cb0',
+                                fontWeight: 'bold',
+                                textDecoration: 'none'
+                            }}>
+                                Login
+                            </Link>
                         </p>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     );
 };

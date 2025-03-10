@@ -20,7 +20,7 @@ const Login: React.FC = () => {
             return;
         } else {
             try {
-                await dispatch(googleLogin( decodedEmail));
+                await dispatch(googleLogin(decodedEmail));
                 toast.success('Login successful');
                 navigate('/');
             } catch (err : any) {
@@ -28,10 +28,12 @@ const Login: React.FC = () => {
             }
         }
     };
+    
     const errorGoogle = () => {
         toast.error('Login failed');
         return;
     };
+    
     const handleLogin = async () => {
         if (!email || !password) {
             toast.error('Please fill in all fields');
@@ -41,7 +43,6 @@ const Login: React.FC = () => {
                 await dispatch(login({ email, password })).unwrap();
                 toast.success('Login successful');
                 navigate('/');
-                
             } catch (err : any) {
                 toast.error(err);
             }
@@ -49,19 +50,58 @@ const Login: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100">
-            <main className="flex-grow p-4 flex justify-center items-center pb-20">
-                <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
-                    <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-                    <div className="flex justify-center mb-4">
+        <div style={{ 
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
+            backgroundColor: '#e6f2ff',
+            padding: '0 16px'
+        }}>
+            <div style={{
+                width: '100%',
+                maxWidth: '400px',
+                margin: '0 auto',
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+                border: '4px solid #bcdcff'
+            }}>
+                <div style={{
+                    backgroundColor: '#d9edff',
+                    padding: '16px 24px',
+                    borderBottom: '2px solid #bcdcff'
+                }}>
+                    <h2 style={{
+                        fontSize: '24px',
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        color: '#2c5282',
+                        margin: 0
+                    }}>Login</h2>
+                </div>
+                
+                <div style={{ padding: '20px' }}>
+                    <div style={{ 
+                        marginBottom: '20px',
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}>
                         <GoogleLogin 
-                            containerProps={{ className: "bg-red-600 text-white px-4 py-2 rounded-lg flex items-center" }} 
                             onSuccess={responseGoogle} 
                             onError={errorGoogle} 
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                    
+                    <div style={{ marginBottom: '14px' }}>
+                        <label style={{
+                            display: 'block',
+                            fontSize: '14px',
+                            fontWeight: 'bold',
+                            marginBottom: '6px',
+                            color: '#4a5568'
+                        }}>
                             Email
                         </label>
                         <input
@@ -69,12 +109,28 @@ const Login: React.FC = () => {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            style={{
+                                width: '94%',
+                                padding: '10px',
+                                backgroundColor: '#ebf5ff',
+                                border: '2px solid #90cdf4',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: 'bold',
+                                outline: 'none'
+                            }}
                             placeholder="Enter your email"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                    
+                    <div style={{ marginBottom: '20px' }}>
+                        <label style={{
+                            display: 'block',
+                            fontSize: '14px',
+                            fontWeight: 'bold',
+                            marginBottom: '6px',
+                            color: '#4a5568'
+                        }}>
                             Password
                         </label>
                         <input
@@ -82,26 +138,54 @@ const Login: React.FC = () => {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            style={{
+                                width: '94%',
+                                padding: '10px',
+                                backgroundColor: '#ebf5ff',
+                                border: '2px solid #90cdf4',
+                                borderRadius: '8px',
+                                fontSize: '16px',
+                                fontWeight: 'bold',
+                                outline: 'none'
+                            }}
                             placeholder="Enter your password"
                         />
                     </div>
+                    
                     <button
                         onClick={handleLogin}
-                        className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                        style={{
+                            width: '100%',
+                            backgroundColor: '#3182ce',
+                            color: 'white',
+                            padding: '10px',
+                            borderRadius: '8px',
+                            fontSize: '18px',
+                            fontWeight: 'bold',
+                            border: 'none',
+                            cursor: 'pointer'
+                        }}
                     >
                         Login
                     </button>
-                    <div className="mt-4 text-center">
-                        <p className="text-gray-700">
+                    
+                    <div style={{
+                        marginTop: '14px',
+                        textAlign: 'center'
+                    }}>
+                        <p style={{ color: '#4a5568' }}>
                             Don't have an account?{' '}
-                            <Link to="/register" className="text-blue-500 hover:underline">
+                            <Link to="/register" style={{ 
+                                color: '#2b6cb0',
+                                fontWeight: 'bold',
+                                textDecoration: 'none'
+                            }}>
                                 Register
                             </Link>
                         </p>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     );
 };
