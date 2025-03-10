@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
 import Post from '../components/Post';
 import { toast } from 'react-toastify';
 import { messageClear } from '../store/reducer/postSlice';
@@ -31,7 +30,6 @@ const Home: React.FC = () => {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
-            <Header />
             <main className="flex-grow p-4 flex flex-col items-center">
                 <button
                     onClick={handleCreatePost}

@@ -18,12 +18,36 @@ interface UserState {
 
 export const register = createAsyncThunk(
     'user/register',
-    async (userData: { email: string; password: string; userName: string }, { rejectWithValue, fulfillWithValue }) => {
+    async (userData: { email: string; password: string; userName: string, image?: string }, { rejectWithValue, fulfillWithValue }) => {
         try {
+            console.log("Registering user with data:", {
+                ...userData,
+                password: userData.password ? "***" : undefined // Hide actual password in logs
+            });
+            
+            // Check that api is correctly configured
+            console.log("API base URL:", api.defaults.baseURL);
+            
             const { data } = await api.post('/auth/register', userData);
+            console.log("Registration successful:", data);
             return fulfillWithValue(data);
         } catch (error : any) {
-            return rejectWithValue(error.response.data.error || 'Registration failed');
+            console.error("Registration error:", error);
+            
+            // More detailed error logging
+            if (error.response) {
+                console.error("Error response:", {
+                    status: error.response.status,
+                    data: error.response.data,
+                    headers: error.response.headers
+                });
+            } else if (error.request) {
+                console.error("No response received:", error.request);
+            } else {
+                console.error("Error setting up request:", error.message);
+            }
+            
+            return rejectWithValue(error.response?.data?.error || 'Registration failed');
         }
     }
 );

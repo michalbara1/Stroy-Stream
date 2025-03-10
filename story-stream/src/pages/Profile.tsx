@@ -9,7 +9,6 @@ import { getAccessToken } from '../utils/authUtils';
 import { update_profile } from '../store/reducer/userSlice';
 import {useNavigate } from 'react-router-dom';
 import { update_comment } from '../store/reducer/commentSlice';
-import Header from '../components/Header';
 
 const Profile: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -151,7 +150,6 @@ const Profile: React.FC = () => {
     return (
         
         <div className="min-h-screen flex flex-col bg-gray-100">
-            <Header />
             <main className="flex-grow p-4 flex justify-center ">
                 <div className="flex flex-col md:flex-row w-full max-w-5xl gap-6">
                     {/* User Details Section */}

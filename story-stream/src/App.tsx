@@ -8,12 +8,14 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import { ToastContainer } from 'react-toastify';
 import EditPost from './pages/EditPost';
+import Header from './components/Header';
 
 const App: React.FC = () => {
 
 
   return (
     <Router>
+        <Header/>
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />

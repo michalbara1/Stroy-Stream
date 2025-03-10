@@ -41,7 +41,7 @@ function Header() {
                 </div>
 
                 {/* Right: User Info and Navigation */}
-                <div style={{ display: 'inline-block', position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}>
+                <div style={{ display: 'inline-block', position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' , }}>
                     {isLogIn ? (
                         <>
                             <Link to="/profile" className="text-white text-sm" style={{ marginRight: '10px' }}>
