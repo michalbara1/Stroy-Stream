@@ -9,12 +9,25 @@ import Pagination from './Pagination';
 import Loader from './Loader';
 import { baseURL } from '../api/api';
 
-const Post: React.FC = () => {
+interface PostProps {
+    externalSortCriteria?: string;
+    externalCurrentPage?: number;
+    onExternalPageChange?: (pageNumber: number) => void;
+}
+
+const Post: React.FC<PostProps> = ({ 
+    externalSortCriteria, 
+    externalCurrentPage,
+    onExternalPageChange
+}) => {
     const { posts, totalPages, currentPage, loading } = useSelector((state: RootState) => state.posts);
     const { userId } = useSelector((state: RootState) => state.user);
-    const [currentPagee, setCurrentPage] = useState(currentPage);
+    
+    // Use external props if provided, otherwise use local state
+    const [currentPagee, setCurrentPage] = useState(externalCurrentPage || currentPage);
     const [postsPerPage] = useState(2);
-    const [sortCriteria, setSortCriteria] = useState('createdAt');
+    const [sortCriteria, setSortCriteria] = useState(externalSortCriteria || 'createdAt');
+    
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
@@ -30,12 +43,24 @@ const Post: React.FC = () => {
         if (window.confirm('Are you sure you want to delete this post?')) {
             dispatch(delete_post({ postId, postData: null })).then(() => {
                 if (posts.length === 1 && currentPagee > 1) {
-                    setCurrentPage(currentPagee - 1);
+                    handlePageChange(currentPagee - 1);
+                } else {
+                    dispatch(get_posts({ page: currentPagee, limit: postsPerPage, sort: sortCriteria }));
                 }
-                dispatch(get_posts({ page: currentPagee, limit: postsPerPage, sort: sortCriteria }));
             });
         }
     };
+
+    useEffect(() => {
+        // Update local state when external props change
+        if (externalSortCriteria !== undefined) {
+            setSortCriteria(externalSortCriteria);
+        }
+        
+        if (externalCurrentPage !== undefined) {
+            setCurrentPage(externalCurrentPage);
+        }
+    }, [externalSortCriteria, externalCurrentPage]);
 
     useEffect(() => {}, [loading]);
 
@@ -46,34 +71,23 @@ const Post: React.FC = () => {
     }, [dispatch, currentPagee, postsPerPage, sortCriteria]);
 
     const handlePageChange = (pageNumber: number) => {
-        setCurrentPage(pageNumber);
-        window.scrollTo(0, 0);
+        if (onExternalPageChange) {
+            // If controlled externally, call the parent handler
+            onExternalPageChange(pageNumber);
+        } else {
+            // Otherwise, use local state
+            setCurrentPage(pageNumber);
+            window.scrollTo(0, 0);
+        }
     };
-
-    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSortCriteria(event.target.value);
-        handlePageChange(1);
-    };
-
-    const sortedPosts = posts;
 
     return (
         <div className="flex flex-col gap-6 w-full max-w-2xl mx-auto">
-            <div className="flex justify-end mb-4">
-                <select
-                    value={sortCriteria}
-                    onChange={handleSortChange}
-                    className="bg-white border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition hover:bg-gray-100"
-                >
-                    <option value="createdAt">Newest</option>
-                    <option value="numLikes">Most Liked</option>
-                </select>
-            </div>
             {loading ? (
                 <Loader />
             ) : (
                 <>
-                    {sortedPosts.map((post) => (
+                    {posts.map((post) => (
                         <div key={post._id} className="bg-white shadow-md rounded-lg overflow-hidden relative">
                             {post.ownerId === userId && (
                                 <div className="absolute top-2 right-2 flex space-x-2">
@@ -94,16 +108,15 @@ const Post: React.FC = () => {
 
                             {/* Post Content */}
                             <div className="p-4 space-y-3">
-                        {/* User Info (Username + Profile Image) */}
-                        <Link to="/profile" style={{ marginRight: '10px', display: 'inline-block', verticalAlign: 'middle' }}>
+                            {/* User Info (Username + Profile Image) - Fixed Version */}
+                            <Link to="/profile" style={{ marginRight: '10px', display: 'inline-block', verticalAlign: 'middle' }}>
                                 <img
                                     src={`${baseURL}${post.userImg}`}
                                     alt="User"
-                                    style={{ width: '35', height: '35px', borderRadius: '50%' }}
+                                    style={{ width: '35px', height: '35px', borderRadius: '50%' }}
                                 />
                                 <p className="text-base font-bold text-gray-900">{post.userName}</p>
                             </Link>
-
                                 {/* Post Title */}
                                 <h2 className="text-2xl font-bold text-gray-900 mb-3">{post.title}</h2>
 
