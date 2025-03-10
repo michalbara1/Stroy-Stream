@@ -119,7 +119,7 @@ const Comments: React.FC = () => {
                         {comments.map(comment => (
                             <div key={comment._id} className="bg-gray-100 p-4 rounded-lg shadow-md relative">
                                 <div className="flex items-center">
-                                    <img src={`{comment.img}`} alt={comment.userName} className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0" />
+                                    <img src={`${baseURL}${comment.img}`} alt={comment.userName} className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0" />
                                     <h4 className="ml-3 text-md font-semibold">{comment.userName}</h4>
                                     {comment.ownerId === userId && (
                                         <div className="absolute top-2 right-2 flex space-x-2">

@@ -80,7 +80,6 @@ const Post: React.FC = () => {
                                     <button
                                         className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition"
                                         onClick={() => post._id && handleEdit(post._id)}
-                                        
                                     >
                                         <FaEdit />
                                     </button>
@@ -95,33 +94,35 @@ const Post: React.FC = () => {
 
                             {/* Post Content */}
                             <div className="p-4 space-y-3">
-                                {/* Post Title */}
-                                <p className="text-2xl font-extrabold text-blue-600">{post.title}</p>
+                        {/* User Info (Username + Profile Image) */}
+                        <Link to="/profile" style={{ marginRight: '10px', display: 'inline-block', verticalAlign: 'middle' }}>
+                                <img
+                                    src={`${baseURL}${post.userImg}`}
+                                    alt="User"
+                                    style={{ width: '35', height: '35px', borderRadius: '50%' }}
+                                />
+                                <p className="text-base font-bold text-gray-900">{post.userName}</p>
+                            </Link>
 
-                                {/* User Info (Profile Image + Username) */}
-                                <div className="flex items-center gap-3">
-                                    <img
-                                        src={`${baseURL}${post.userImg}`}
-                                        alt={post.userName}
-                                        className="w-8 h-8 rounded-full object-cover"
-                                    />
-                                    <p className="text-sm text-gray-600 font-medium">{post.userName}</p>
-                                </div>
+                                {/* Post Title */}
+                                <h2 className="text-2xl font-bold text-gray-900 mb-3">{post.title}</h2>
 
                                 {/* Post Body Content */}
-                                <div className="text-gray-800 leading-relaxed">{parse(post.content)}</div>
-                            </div>
+                                <div className="text-base text-gray-800 leading-relaxed mb-3">
+                                    {parse(post.content)}
+                                </div>
 
-                            {/* Post Image */}
-                            {post.postImg && (
-                                <Link to={`/comments/${post._id}`} className="block w-full h-48 bg-gray-200">
-                                    <img
-                                        src={`${baseURL}${post.postImg}`}
-                                        alt={post.title}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </Link>
-                            )}
+                                {/* Post Image */}
+                                {post.postImg && (
+                                    <Link to={`/comments/${post._id}`} className="block w-full h-48 bg-gray-200 mt-3">
+                                        <img
+                                            src={`${baseURL}${post.postImg}`}
+                                            alt={post.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </Link>
+                                )}
+                            </div>
 
                             {/* Post Footer (Likes + Comments) */}
                             <div className="p-4 flex justify-between items-center border-t">
@@ -135,7 +136,7 @@ const Post: React.FC = () => {
                                     ) : (
                                         <FaHeart className="text-gray-500" />
                                     )}
-                                    <span className="text-gray-800 font-medium">{post.numLikes}</span>
+                                    <span className="text-sm text-gray-800 font-medium">{post.numLikes}</span>
                                 </button>
 
                                 {/* Comments Link */}
@@ -144,7 +145,7 @@ const Post: React.FC = () => {
                                     className="flex items-center gap-2 text-blue-500 hover:text-blue-600 transition"
                                 >
                                     <FaRegCommentDots />
-                                    <span className="text-gray-800 font-medium">{post.comments}</span>
+                                    <span className="text-sm text-gray-800 font-medium">{post.comments}</span>
                                 </Link>
                             </div>
                         </div>
