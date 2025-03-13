@@ -78,14 +78,14 @@ const MyPost: React.FC = () => {
                     )}
 
                     {/* User Info */}
-                    <div className="flex items-center p-4">
-                        <img
-                            src={`${baseURL}${post.userImg}`}
-                            alt={post.userName}
-                            className="w-10 h-10 rounded-full bg-gray-300 flex-shrink-0"
-                        />
-                        <h2 className="ml-4 text-xl font-bold">{post.userName}</h2>
-                    </div>
+                    <Link to="/profile" style={{ marginRight: '10px', display: 'inline-block', verticalAlign: 'middle' }}>
+                                                    <img
+                                                        src={`${baseURL}${post.userImg}`}
+                                                        alt="User"
+                                                        style={{ width: '35px', height: '35px', borderRadius: '50%' }}
+                                                    />
+                                                    <p className="text-base font-bold text-gray-900">{post.userName}</p>
+                    </Link>
 
                     {/* Post Content */}
                     <div className="p-4">
